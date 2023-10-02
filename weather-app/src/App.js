@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "./components/Loading";
+
 function App() {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
   //위치 가져오기
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -17,8 +21,9 @@ function App() {
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
       );
-
-      console.log(res);
+      setData(res.data);
+      setLoading(false);
+      console.log(res.data);
     } catch (e) {
       console.log(e);
     }
@@ -29,7 +34,14 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <div></div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div>
+          <div>{data.name}</div>
+          <div>{data.main.temp - 273.15}</div>
+        </div>
+      )}
     </div>
   );
 }
