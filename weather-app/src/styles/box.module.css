@@ -1,8 +1,9 @@
 .box {
-  background-color: #ade3f0;
-  border-radius: 20px;
-  height: 20vh;
+  background-color: #000;
+  opacity: 0.5;
+  border-radius: 3vw;
+  margin: 5vw;
+  color: #fff;
   text-align: center;
-  margin: 1vh;
-  padding: 1vh;
+  padding: 5vw;
 }

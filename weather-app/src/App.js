@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./components/Loading";
-import styles from "./styles/box.module.css";
 import CurrentTime from "./components/CurrentTime";
+import Date from "./components/Date";
+import "./styles/App.css";
+import styles from "./styles/box.module.css";
 
 function App() {
   const [data, setData] = useState({});
@@ -40,16 +42,18 @@ function App() {
         <Loading />
       ) : (
         <div>
-          <div style={{ textAlign: "center" }}>
-            <div>
-              <CurrentTime />
-            </div>
-            <div> {(data.main.temp - 273.15).toFixed(1)}</div>
-            <div>{data.weather[0].main}</div>
+          <div className={styles.box} style={{ width: "80vw" }}>
+            <Date />
+            <CurrentTime />
           </div>
-          <div className={styles.box}>
-            <div>날짜</div>
-            <div>시간별 날씨</div>{" "}
+          <div className={styles.box} style={{ width: "80vw" }}>
+            <div>{data.name}</div>
+            <div> {(data.main.temp - 273.15).toFixed(1)}°</div>
+            <div>{data.weather[0].main}</div>
+            <div>
+              최고:{(data.main.temp_max - 273.15).toFixed(1)}° 최저:
+              {(data.main.temp_min - 273.15).toFixed(1)}°
+            </div>
           </div>
         </div>
       )}
